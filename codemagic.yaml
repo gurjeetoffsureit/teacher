@@ -5,7 +5,7 @@ workflows:
     react-native-android:
         name: React Native Android
         max_build_duration: 120
-        instance_type: mac_mini
+        instance_type: mac_pro
         environment:
             groups:
             # Add the group environment variables in Codemagic UI (either in Application/Team variables) - https://docs.codemagic.io/variables/environment-variable-groups/
@@ -79,7 +79,7 @@ workflows:
     react-native-ios:
         name: React Native iOS
         max_build_duration: 120
-        instance_type: mac_mini
+        instance_type: mac_pro
         environment:
             groups:
             # Add the group environment variables in Codemagic UI (either in Application/Team variables) - https://docs.codemagic.io/variables/environment-variable-groups/
@@ -95,7 +95,7 @@ workflows:
                 XCODE_WORKSPACE: "ios/YOUR_WORKSPACE_NAME.xcworkspace" # <-- Put the name of your Xcode workspace here
                 XCODE_SCHEME: "Teacher" # <-- Put the name of your Xcode scheme here
                 BUNDLE_ID: "com.lessonportal.tap3pro" # <-- Put your Bundle Id here e.g com.domain.myapp
-                APP_STORE_APP_ID: 1107280630 # <-- Put the app id number here. This is found in App Store Connect > App > General > App Information
+                APP_STORE_APP_ID: 1555555551 # <-- Put the app id number here. This is found in App Store Connect > App > General > App Information
             node: latest
             xcode: 12.5
             cocoapods: default
