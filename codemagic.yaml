@@ -5,7 +5,7 @@ workflows:
     react-native-android:
         name: React Native Android
         max_build_duration: 120
-        instance_type: mac_pro
+        instance_type: mac_mini
         environment:
             groups:
             # Add the group environment variables in Codemagic UI (either in Application/Team variables) - https://docs.codemagic.io/variables/environment-variable-groups/
@@ -14,10 +14,10 @@ workflows:
                   # CM_KEYSTORE_PASSWORD <-- Put your keystore password here
                   # CM_KEY_ALIAS_PASSWORD <-- Put your keystore alias password here
                   # CM_KEY_ALIAS_USERNAME <-- Put your keystore alias username here
-                - google_play # <-- (Includes GCLOUD_SERVICE_ACCOUNT_CREDENTIALS <-- Put your google-services.json)
-                - other
+                # - google_play # <-- (Includes GCLOUD_SERVICE_ACCOUNT_CREDENTIALS <-- Put your google-services.json)
+                # - other
             vars:
-                PACKAGE_NAME: "YOUR_PACKAGE_NAME" # <-- Put your package name here e.g. com.domain.myapp
+                PACKAGE_NAME: "com.lessonportal.tap3pro" # <-- Put your package name here e.g. com.domain.myapp
             node: latest
         triggering:
             events:
@@ -53,33 +53,33 @@ workflows:
                 cd android && ./gradlew assembleRelease
         artifacts:
             - android/app/build/outputs/**/*.apk
-        publishing:
-            # See the following link for details about email publishing - https://docs.codemagic.io/publishing-yaml/distribution/#email
-            email:
-                recipients:
-                    - user_1@example.com
-                    - user_2@example.com
-                notify:
-                  success: true     # To not receive a notification when a build succeeds
-                  failure: false    # To not receive a notification when a build fails
-            slack: 
-              # See the following link about how to connect your Slack account - https://docs.codemagic.io/publishing-yaml/distribution/#slack
-              channel: '#channel-name'
-              notify_on_build_start: true   # To receive a notification when a build starts
-              notify:
-                success: true               # To not receive a notification when a build succeeds
-                failure: false              # To not receive a notification when a build fails
-            google_play:
-              # See the following link for information regarding publishing to Google Play - https://docs.codemagic.io/publishing-yaml/distribution/#google-play
-              credentials: $GCLOUD_SERVICE_ACCOUNT_CREDENTIALS
-              track: alpha   # Any default or custom track that is not in ‘draft’ status
+        # publishing:
+        #     # See the following link for details about email publishing - https://docs.codemagic.io/publishing-yaml/distribution/#email
+        #     email:
+        #         recipients:
+        #             - user_1@example.com
+        #             - user_2@example.com
+        #         notify:
+        #           success: true     # To not receive a notification when a build succeeds
+        #           failure: false    # To not receive a notification when a build fails
+            # slack: 
+            #   # See the following link about how to connect your Slack account - https://docs.codemagic.io/publishing-yaml/distribution/#slack
+            #   channel: '#channel-name'
+            #   notify_on_build_start: true   # To receive a notification when a build starts
+            #   notify:
+            #     success: true               # To not receive a notification when a build succeeds
+            #     failure: false              # To not receive a notification when a build fails
+            # google_play:
+            #   # See the following link for information regarding publishing to Google Play - https://docs.codemagic.io/publishing-yaml/distribution/#google-play
+            #   credentials: $GCLOUD_SERVICE_ACCOUNT_CREDENTIALS
+            #   track: alpha   # Any default or custom track that is not in ‘draft’ status
 
 
-
+              
     react-native-ios:
         name: React Native iOS
         max_build_duration: 120
-        instance_type: mac_pro
+        instance_type: mac_mini
         environment:
             groups:
             # Add the group environment variables in Codemagic UI (either in Application/Team variables) - https://docs.codemagic.io/variables/environment-variable-groups/
@@ -93,9 +93,9 @@ workflows:
                 - other
             vars:
                 XCODE_WORKSPACE: "ios/YOUR_WORKSPACE_NAME.xcworkspace" # <-- Put the name of your Xcode workspace here
-                XCODE_SCHEME: "YOUR_SCHEME_NAME" # <-- Put the name of your Xcode scheme here
-                BUNDLE_ID: "YOUR_BUNDLE_ID_HERE" # <-- Put your Bundle Id here e.g com.domain.myapp
-                APP_STORE_APP_ID: 1555555551 # <-- Put the app id number here. This is found in App Store Connect > App > General > App Information
+                XCODE_SCHEME: "Teacher" # <-- Put the name of your Xcode scheme here
+                BUNDLE_ID: "com.lessonportal.tap3pro" # <-- Put your Bundle Id here e.g com.domain.myapp
+                APP_STORE_APP_ID: 1107280630 # <-- Put the app id number here. This is found in App Store Connect > App > General > App Information
             node: latest
             xcode: 12.5
             cocoapods: default
@@ -145,27 +145,27 @@ workflows:
             - /tmp/xcodebuild_logs/*.log
             - $HOME/Library/Developer/Xcode/DerivedData/**/Build/**/*.app
             - $HOME/Library/Developer/Xcode/DerivedData/**/Build/**/*.dSYM
-        publishing:
-          # See the following link for details about email publishing - https://docs.codemagic.io/publishing-yaml/distribution/#email
-          email:
-            recipients:
-              - user_1@example.com
-              - user_2@example.com
-            notify:
-              success: true     # To not receive a notification when a build succeeds
-              failure: false    # To not receive a notification when a build fails
-          slack: 
-            # See the following link about how to connect your Slack account - https://docs.codemagic.io/publishing-yaml/distribution/#slack
-            channel: '#channel-name'
-            notify_on_build_start: true   # To receive a notification when a build starts
-            notify:
-              success: true               # To not receive a notification when a build succeeds
-              failure: false              # To not receive a notification when a build fails
-          app_store_connect:                 
-            api_key: $APP_STORE_CONNECT_PRIVATE_KEY         # Contents of the API key, can also reference environment variable such as $APP_STORE_CONNECT_PRIVATE_KEY
-            key_id: $APP_STORE_CONNECT_KEY_IDENTIFIER       # Alphanumeric value that identifies the API key, can also reference environment variable such as $APP_STORE_CONNECT_KEY_IDENTIFIER
-            issuer_id: $APP_STORE_CONNECT_ISSUER_ID         # Alphanumeric value that identifies who created the API key, can also reference environment variable such as $APP_STORE_CONNECT_ISSUER_ID
-            submit_to_testflight: false                     # Optional boolean, defaults to false. Whether or not to submit the uploaded build to TestFlight beta review. Required for distributing to beta groups. Note: This action is performed during post-processing.
+        # publishing:
+        #   # See the following link for details about email publishing - https://docs.codemagic.io/publishing-yaml/distribution/#email
+        #   email:
+        #     recipients:
+        #       - user_1@example.com
+        #       - user_2@example.com
+        #     notify:
+        #       success: true     # To not receive a notification when a build succeeds
+        #       failure: false    # To not receive a notification when a build fails
+          # slack: 
+          #   # See the following link about how to connect your Slack account - https://docs.codemagic.io/publishing-yaml/distribution/#slack
+          #   channel: '#channel-name'
+          #   notify_on_build_start: true   # To receive a notification when a build starts
+          #   notify:
+          #     success: true               # To not receive a notification when a build succeeds
+          #     failure: false              # To not receive a notification when a build fails
+          # app_store_connect:                 
+          #   api_key: $APP_STORE_CONNECT_PRIVATE_KEY         # Contents of the API key, can also reference environment variable such as $APP_STORE_CONNECT_PRIVATE_KEY
+          #   key_id: $APP_STORE_CONNECT_KEY_IDENTIFIER       # Alphanumeric value that identifies the API key, can also reference environment variable such as $APP_STORE_CONNECT_KEY_IDENTIFIER
+          #   issuer_id: $APP_STORE_CONNECT_ISSUER_ID         # Alphanumeric value that identifies who created the API key, can also reference environment variable such as $APP_STORE_CONNECT_ISSUER_ID
+          #   submit_to_testflight: false                     # Optional boolean, defaults to false. Whether or not to submit the uploaded build to TestFlight beta review. Required for distributing to beta groups. Note: This action is performed during post-processing.
             # beta_groups:                                  # Specify the names of beta tester groups that will get access to the build once it has passed beta review. 
             #      - group name 1
             #      - group name 2  
