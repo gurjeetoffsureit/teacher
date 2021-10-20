@@ -1,5 +1,5 @@
 workflows:
   hello-world:
-    name: Hello world workflow
+    name: Hello world workflow gurjeet
     scripts:
         - echo "Hello World!"
